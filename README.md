@@ -1,73 +1,162 @@
-# Welcome to your Lovable project
+# PlanifyAI
 
-## Project info
+**Plan, visualize, and track your content calendar — powered by AI.**
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+PlanifyAI is a modern, responsive web application designed for creators and marketers to plan, visualize, and track their social media content calendar. Built with a focus on sleek UI, strong UX, and impressive animations.
 
-## How can I edit this code?
+![PlanifyAI Dashboard](./screenshot.png)
 
-There are several ways of editing your application.
+## Features
 
-**Use Lovable**
+### 📅 Content Calendar
+- Interactive calendar view with drag & drop support
+- Schedule posts across multiple platforms
+- Visual status indicators (Draft, Scheduled, Published)
+- Quick-add functionality for rapid content creation
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+### 🤖 AI Content Generator
+- Generate creative content ideas based on topic, audience, and platform
+- Get suggested posting times and hashtags
+- Platform-specific content recommendations
+- Easy integration point for real AI APIs (OpenAI, Claude, etc.)
 
-Changes made via Lovable will be committed automatically to this repo.
+### 📊 Analytics Dashboard
+- Engagement metrics over time (line charts)
+- Posts per platform distribution (bar charts)
+- Content type breakdown (pie charts)
+- Key performance indicators (KPIs)
 
-**Use your preferred IDE**
+### 📝 Content Backlog
+- Kanban-style content management
+- Filter by status (Idea, Draft, Approved, Scheduled, Published)
+- Grid and list view options
+- Quick scheduling from backlog to calendar
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 🎨 Design Features
+- Dark/Light mode toggle
+- Neon gradient accents with glassmorphism effects
+- Smooth Framer Motion animations throughout
+- Fully responsive design
+- Modern SaaS-level UI polish
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Tech Stack
 
-Follow these steps:
+- **React** (v18) - UI Framework
+- **TypeScript** - Type Safety
+- **Vite** - Build Tool & Dev Server
+- **Tailwind CSS** - Styling
+- **Framer Motion** - Animations
+- **Recharts** - Data Visualization
+- **Zustand** - State Management
+- **Lucide React** - Icons
+- **date-fns** - Date Utilities
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## Getting Started
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Prerequisites
 
-# Step 3: Install the necessary dependencies.
-npm i
+- Node.js 18+ 
+- npm or yarn
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/planifyai.git
+
+# Navigate to project directory
+cd planifyai
+
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The app will be available at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Build for Production
 
-**Use GitHub Codespaces**
+```bash
+npm run build
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project Structure
 
-## What technologies are used for this project?
+```
+src/
+├── components/
+│   ├── common/          # Reusable UI components
+│   ├── layout/          # Layout components (Sidebar, Navbar)
+│   ├── modals/          # Modal dialogs
+│   └── ui/              # Base UI components (shadcn/ui)
+├── data/                # Mock data generators
+├── features/
+│   ├── ai/              # AI suggestions panel
+│   ├── analytics/       # Analytics dashboard
+│   ├── calendar/        # Calendar view
+│   └── content/         # Content backlog
+├── services/            # API services
+│   └── ai.ts            # AI service (plug in your API here)
+├── store/               # Zustand state management
+├── types/               # TypeScript type definitions
+└── pages/               # Page components
+```
 
-This project is built with:
+## Connecting a Real AI API
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The AI functionality is currently mocked. To connect a real AI API:
 
-## How can I deploy this project?
+1. Create a `.env` file in the project root:
+   ```
+   VITE_AI_API_KEY=your_api_key_here
+   ```
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+2. Update `src/services/ai.ts` with your API integration:
+   ```typescript
+   const response = await fetch('https://api.openai.com/v1/chat/completions', {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${import.meta.env.VITE_AI_API_KEY}`,
+     },
+     body: JSON.stringify({
+       model: 'gpt-4',
+       messages: [{ role: 'user', content: prompt }]
+     }),
+   });
+   ```
 
-## Can I connect a custom domain to my Lovable project?
+## Customization
 
-Yes, you can!
+### Theme Colors
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Edit `src/index.css` to customize the color scheme:
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+```css
+:root {
+  --neon-purple: 270 95% 65%;
+  --neon-blue: 210 100% 60%;
+  --neon-cyan: 185 100% 55%;
+  /* ... other colors */
+}
+```
+
+### Adding New Platforms
+
+1. Add the platform to `src/types/index.ts`
+2. Add platform colors in `src/data/analytics.ts`
+3. Add platform icon in `src/components/common/PlatformIcon.tsx`
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+MIT License - feel free to use this project for personal or commercial purposes.
+
+---
+
+Built with ❤️ for the creator community
